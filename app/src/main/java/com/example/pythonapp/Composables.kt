@@ -1,10 +1,12 @@
 package com.example.pythonapp
 
+import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -123,70 +125,88 @@ fun ThemeCard(theme: Theme, navController: NavController) {
 }
 
 @Composable
-fun AccountInfoScreen(
-    profilePictureRes: Int,
-    userName: String,
-    achievements: List<Int>
-) {
-    MaterialTheme{
-        Column(
+fun AccountInfoScreen(profilePictureRes: Int, userName: String, context: Context) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        AppHeader()
+
+        // Profile Picture
+        Image(
+            painter = painterResource(id = profilePictureRes),
+            contentDescription = "Profile Picture",
             modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            AppHeader()
-            // Profile Picture
+                .size(100.dp)
+                .aspectRatio(1f)
+                .clip(CircleShape),
+            contentScale = ContentScale.Crop
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // User Name
+        Text(
+            text = userName,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.primary
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        // Achievements Title
+        Text(
+            text = "Achievements",
+            fontSize = 16.sp,
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colorScheme.primary
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // Achievements Row
+        AchievementsRow(context)
+
+        Spacer(modifier = Modifier.height(16.dp))
+    }
+}
+
+fun saveAchievement(context: Context, key: String) {
+    val prefs = context.getSharedPreferences("achievements", Context.MODE_PRIVATE)
+    prefs.edit().putBoolean(key, true).apply()
+}
+
+fun isAchievementUnlocked(context: Context, key: String): Boolean {
+    val prefs = context.getSharedPreferences("achievements", Context.MODE_PRIVATE)
+    return prefs.getBoolean(key, false)
+}
+
+@Composable
+fun AchievementsRow(context: Context) {
+    val firstLessonUnlocked = isAchievementUnlocked(context, "first_lesson_completed")
+    val allLessonsUnlocked = isAchievementUnlocked(context, "all_lessons_completed")
+
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        if (firstLessonUnlocked) {
             Image(
-                painter = painterResource(id = profilePictureRes),
-                contentDescription = "Profile Picture",
-                modifier = Modifier
-                    .size(100.dp)
-                    .aspectRatio(1f)
-                    .clip(CircleShape),
-                contentScale = ContentScale.Crop
+                painter = painterResource(id = R.drawable.learn_icon),
+                contentDescription = "First Lesson Completed",
+                modifier = Modifier.size(80.dp)
             )
+        }
 
-            Spacer(modifier = Modifier.height(16.dp))
-
-            // User Name
-            Text(
-                text = userName,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.primary
+        if (allLessonsUnlocked) {
+            Image(
+                painter = painterResource(id = R.drawable.account_icon),
+                contentDescription = "All Lessons Completed",
+                modifier = Modifier.size(80.dp)
             )
-
-            Spacer(modifier = Modifier.height(24.dp))
-
-            // Achievements Gallery
-            Text(
-                text = "Achievements",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.primary
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            LazyRow(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                items(achievements) { achievementRes ->
-                    Image(
-                        painter = painterResource(id = achievementRes),
-                        contentDescription = "Achievement Icon",
-                        modifier = Modifier
-                            .size(80.dp)
-                            .clip(RoundedCornerShape(16.dp))
-                            .background(Color.LightGray),
-                        contentScale = ContentScale.Crop
-                    )
-                }
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }

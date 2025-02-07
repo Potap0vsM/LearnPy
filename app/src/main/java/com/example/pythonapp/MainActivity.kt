@@ -1,5 +1,6 @@
 package com.example.pythonapp
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -47,7 +48,6 @@ class MainActivity : ComponentActivity() {
         repositoryQuestion.questionList
         repositoryUserQuest.userQuestList
         repositoryUserAchievement.userAchievementList
-
     }
 }
 
