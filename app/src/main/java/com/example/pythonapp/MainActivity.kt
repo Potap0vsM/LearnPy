@@ -32,30 +32,6 @@ class MainActivity : ComponentActivity() {
         val repositoryUserQuest = UserQuestRepository(userQuestDao = database.userQuestDao())
         val repositoryUserAchievement = UserAchievementRepository(userAchievementDao = database.userAchievementDao())
 
-        val newUser = User(id = 1, name = "Test")
-
-        val newQuestion1 = Question(1, "First Question", "First right answer", "First topic")
-        val newQuestion2 = Question(2, "Second Question", "Second right answer", "Second topic")
-        val newQuestion3 = Question(3, "Third Question", "Third right answer", "Third topic")
-        val newQuestion4 = Question(4, "Fourth Question", "Fourth right answer", "Fourth topic")
-        val newQuestion5 = Question(5, "Fifth Question", "Fifth right answer", "Fifth topic")
-
-        val newUserQuestionConnection1 = UserQuest(1, 1, 1, false)
-        val newUserQuestionConnection2 = UserQuest(2, 1, 2, false)
-        val newUserQuestionConnection3 = UserQuest(3, 1, 3, false)
-        val newUserQuestionConnection4 = UserQuest(4, 1, 4, false)
-        val newUserQuestionConnection5 = UserQuest(5, 1, 5, false)
-
-        val newAchievement1 = Achievement(1, "First achievement", R.drawable.learn_icon, false)
-        val newAchievement2 = Achievement(2, "Second achievement", R.drawable.account_icon, false)
-
-
-
-        val newUserAchievement1 = UserAchievement(1, 1, 1)
-        val newUserAchievement2 = UserAchievement(2, 1, 2)
-
-        val newUser2 = User(id = 2, name = "Test")
-
         repositoryQuestion.editQuestion(1, "What function will help you output information?", "print()", "Hello, World!")
         repositoryQuestion.editQuestion(2, "What would be type of this character sequence: '81928'", "String", "Variables and Types")
         repositoryQuestion.editQuestion(3, "What function you will use to add something to a existing list?", "append()", "Lists")
@@ -72,7 +48,6 @@ class MainActivity : ComponentActivity() {
         repositoryUserQuest.userQuestList
         repositoryUserAchievement.userAchievementList
 
-        Log.d("RepoCheck", repositoryAchievement.achievementList.value.toString())
     }
 }
 

@@ -18,6 +18,12 @@ class AchievementRepository(private val achievementDao: AchievementDao) {
         }
     }
 
+    fun getAchievement(id: Int){
+        coroutineScope.launch(Dispatchers.IO){
+            achievementDao.getAchievement(id)
+        }
+    }
+
     fun editAchievement(id: Int, name: String, src: Int, active:Int){
         coroutineScope.launch(Dispatchers.IO){
             achievementDao.update(id, name, src, active)

@@ -13,6 +13,9 @@ interface AchievementDao {
     @Query("SELECT * FROM achievement")
     fun getAchievements(): LiveData<List<Achievement>>
 
+    @Query("SELECT * FROM achievement WHERE id = :id")
+    fun getAchievement(id: Int): LiveData<Achievement>
+
     @Query("UPDATE achievement SET name = :name, src = :src, active = :active WHERE id = :id")
     fun update(id: Int, name: String, src: Int, active:Int)
 
