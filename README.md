@@ -1,2 +1,3 @@
-**Description**\n
+**Description**
+
 Android application for learning Python
