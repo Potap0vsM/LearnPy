@@ -211,6 +211,9 @@ fun ThemeDetailScreen(theme: Theme, navController: NavController) {
             if (answer.equals(theme.correctAnswer, ignoreCase = true)) {
                 Toast.makeText(context, "Correct!", Toast.LENGTH_SHORT).show()
                 saveAchievement(context, "${theme.title}_completed")
+                if (theme.title == "Hello, World!") {
+                    saveAchievement(context, "first_lesson_completed")
+                }
                 if (checkAllLessonsCompleted(context)) saveAchievement(context, "all_lessons_completed")
             } else {
                 Toast.makeText(context, "Incorrect, try again.", Toast.LENGTH_SHORT).show()
