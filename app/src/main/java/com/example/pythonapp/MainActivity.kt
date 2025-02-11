@@ -1,18 +1,11 @@
 package com.example.pythonapp
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.example.pythonapp.bottom_navigation.MainScreen
 import com.example.pythonapp.database.DatabaseAlles
-import com.example.pythonapp.database.roomdb_achievements.Achievement
-import com.example.pythonapp.database.roomdb_question.Question
-import com.example.pythonapp.database.roomdb_user.User
-import com.example.pythonapp.database.roomdb_userachievment.UserAchievement
-import com.example.pythonapp.database.roomdb_userquest.UserQuest
 import com.example.pythonapp.repositories.AchievementRepository
 import com.example.pythonapp.repositories.QuestionRepository
 import com.example.pythonapp.repositories.UserAchievementRepository

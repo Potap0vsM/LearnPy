@@ -34,7 +34,7 @@ fun NavGraph(
                     "Here, myint is an integer, myfloat is a float, and mystring is a string. " +
                     "You can perform operations like addition on numbers and concatenation on strings.",
             question = "What would be type of this character sequence: '81928'",
-            correctAnswer = "String'"
+            correctAnswer = "String"
         ),
         Theme(
             title = "Lists",

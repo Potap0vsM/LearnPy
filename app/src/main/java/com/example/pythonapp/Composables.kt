@@ -67,7 +67,7 @@ fun StudyScreen(navController: NavController) {
                     "Here, myint is an integer, myfloat is a float, and mystring is a string. " +
                     "You can perform operations like addition on numbers and concatenation on strings.",
             question = "What would be type of this character sequence: '81928'",
-            correctAnswer = "String'"
+            correctAnswer = "String"
         ),
         Theme(
             title = "Lists",
@@ -140,15 +140,10 @@ fun AppHeader() {
 @Composable
 fun ThemeCard(theme: Theme, navController: NavController) {
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp),
+        modifier = Modifier.fillMaxWidth().padding(8.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
-        Column(
-            modifier = Modifier.padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
+        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text(text = theme.title, fontSize = 24.sp, fontWeight = FontWeight.SemiBold)
             Button(onClick = { navController.navigate("themeDetail/${theme.title}") }) {
                 Text(text = "Start topic")
@@ -160,50 +155,32 @@ fun ThemeCard(theme: Theme, navController: NavController) {
 @Composable
 fun AccountInfoScreen(profilePictureRes: Int, userName: String, context: Context) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+        modifier = Modifier.fillMaxSize().padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         AppHeader()
-
-        // Profile Picture
         Image(
             painter = painterResource(id = profilePictureRes),
             contentDescription = "Profile Picture",
-            modifier = Modifier
-                .size(100.dp)
-                .aspectRatio(1f)
-                .clip(CircleShape),
+            modifier = Modifier.size(100.dp).clip(CircleShape),
             contentScale = ContentScale.Crop
         )
-
         Spacer(modifier = Modifier.height(16.dp))
-
-        // User Name
-        Text(
-            text = userName,
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.primary
-        )
-
+        Text(text = userName, fontSize = 20.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
         Spacer(modifier = Modifier.height(24.dp))
-
-        // Achievements Title
-        Text(
-            text = "Achievements",
-            fontSize = 16.sp,
-            fontWeight = FontWeight.SemiBold,
-            color = MaterialTheme.colorScheme.primary
-        )
-
+        Text(text = "Achievements", fontSize = 16.sp, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.primary)
         Spacer(modifier = Modifier.height(8.dp))
-
-        // Achievements Row
         AchievementsRow(context)
+    }
+}
 
-        Spacer(modifier = Modifier.height(16.dp))
+@Composable
+fun AchievementsRow(context: Context) {
+    val firstLessonUnlocked = isAchievementUnlocked(context, "first_lesson_completed")
+    val allLessonsUnlocked = isAchievementUnlocked(context, "all_lessons_completed")
+    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+        if (firstLessonUnlocked) Image(painter = painterResource(id = R.drawable.learn_icon), contentDescription = "First Lesson Completed", modifier = Modifier.size(80.dp))
+        if (allLessonsUnlocked) Image(painter = painterResource(id = R.drawable.got_all_icon), contentDescription = "All Lessons Completed", modifier = Modifier.size(80.dp))
     }
 }
 
@@ -218,74 +195,34 @@ fun isAchievementUnlocked(context: Context, key: String): Boolean {
 }
 
 @Composable
-fun AchievementsRow(context: Context) {
-    val firstLessonUnlocked = isAchievementUnlocked(context, "first_lesson_completed")
-    val allLessonsUnlocked = isAchievementUnlocked(context, "all_lessons_completed")
+fun ThemeDetailScreen(theme: Theme, navController: NavController) {
+    val context = LocalContext.current
+    var answer by remember { mutableStateOf("") }
 
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        if (firstLessonUnlocked) {
-            Image(
-                painter = painterResource(id = R.drawable.learn_icon),
-                contentDescription = "First Lesson Completed",
-                modifier = Modifier.size(80.dp)
-            )
-        }
-
-        if (allLessonsUnlocked) {
-            Image(
-                painter = painterResource(id = R.drawable.account_icon),
-                contentDescription = "All Lessons Completed",
-                modifier = Modifier.size(80.dp)
-            )
-        }
+    Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+        Text(text = theme.title, fontSize = 28.sp, fontWeight = FontWeight.Bold)
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(text = theme.content, fontSize = 18.sp)
+        Spacer(modifier = Modifier.height(24.dp))
+        Text(text = "Question: ${theme.question}", fontSize = 18.sp)
+        TextField(value = answer, onValueChange = { answer = it }, label = { Text("Your answer") })
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(onClick = {
+            if (answer.equals(theme.correctAnswer, ignoreCase = true)) {
+                Toast.makeText(context, "Correct!", Toast.LENGTH_SHORT).show()
+                saveAchievement(context, "${theme.title}_completed")
+                if (checkAllLessonsCompleted(context)) saveAchievement(context, "all_lessons_completed")
+            } else {
+                Toast.makeText(context, "Incorrect, try again.", Toast.LENGTH_SHORT).show()
+            }
+        }) { Text(text = "Check Answer") }
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(onClick = { navController.popBackStack() }) { Text(text = "Back") }
     }
 }
 
-@Composable
-fun ThemeDetailScreen(theme: Theme, navController: NavController) {
-    var answer by remember { mutableStateOf("") }
-    val context = LocalContext.current
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        Text(text = theme.title, fontSize = 28.sp, fontWeight = FontWeight.Bold)
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Text(text = theme.content, fontSize = 18.sp)
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        Text(text = "Вопрос: ${theme.question}", fontSize = 18.sp)
-
-        TextField(
-            value = answer,
-            onValueChange = { answer = it },
-            label = { Text("Your answer") }
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Button(onClick = {
-            if (answer.equals(theme.correctAnswer, ignoreCase = true)) {
-                Toast.makeText(context, "Correct", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(context, "Incorrect, try once again!", Toast.LENGTH_SHORT).show()
-            }
-        }) {
-            Text(text = "Check")
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Button(onClick = { navController.popBackStack() }) {
-            Text(text = "Back")
-        }
-    }
+fun checkAllLessonsCompleted(context: Context): Boolean {
+    val prefs = context.getSharedPreferences("achievements", Context.MODE_PRIVATE)
+    val lessons = listOf("Hello, World!_completed", "Variables and Types_completed", "Lists_completed", "Basic Operators_completed", "Conditions_completed")
+    return lessons.all { prefs.getBoolean(it, false) }
 }
