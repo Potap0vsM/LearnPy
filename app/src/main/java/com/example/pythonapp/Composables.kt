@@ -232,7 +232,7 @@ fun ThemeDetailScreen(theme: Theme, navController: NavController) {
                 .padding(8.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
         ){
-            Text(text = theme.content, fontSize = 18.sp)
+            Text(text = theme.content, fontSize = 18.sp, modifier = Modifier.padding(10.dp))
         }
         Spacer(modifier = Modifier.height(18.dp))
         Text(text = "Question: ${theme.question}", fontSize = 18.sp)
