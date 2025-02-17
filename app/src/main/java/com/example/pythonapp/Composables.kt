@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -29,8 +30,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -133,7 +136,9 @@ fun AppHeader() {
 @Composable
 fun ThemeCard(theme: Theme, navController: NavController) {
     Card(
-        modifier = Modifier.fillMaxWidth().padding(8.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -148,14 +153,18 @@ fun ThemeCard(theme: Theme, navController: NavController) {
 @Composable
 fun AccountInfoScreen(profilePictureRes: Int, userName: String, context: Context) {
     Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         AppHeader()
         Image(
             painter = painterResource(id = profilePictureRes),
             contentDescription = "Profile Picture",
-            modifier = Modifier.size(100.dp).clip(CircleShape),
+            modifier = Modifier
+                .size(100.dp)
+                .clip(CircleShape),
             contentScale = ContentScale.Crop
         )
         Spacer(modifier = Modifier.height(16.dp))
@@ -171,9 +180,80 @@ fun AccountInfoScreen(profilePictureRes: Int, userName: String, context: Context
 fun AchievementsRow(context: Context) {
     val firstLessonUnlocked = isAchievementUnlocked(context, "first_lesson_completed")
     val allLessonsUnlocked = isAchievementUnlocked(context, "all_lessons_completed")
-    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-        if (firstLessonUnlocked) Image(painter = painterResource(id = R.drawable.learn_icon), contentDescription = "First Lesson Completed", modifier = Modifier.size(80.dp))
-        if (allLessonsUnlocked) Image(painter = painterResource(id = R.drawable.got_all_icon), contentDescription = "All Lessons Completed", modifier = Modifier.size(80.dp))
+    Card(modifier = Modifier
+        .fillMaxWidth()
+        .height(500.dp)){
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+            if (firstLessonUnlocked)
+                AchievementCard(icon = R.drawable.first_lesson, text = "Starting strong!", description = "Finished first lesson")
+            if (allLessonsUnlocked)
+                AchievementCard(icon = R.drawable.trophey_icon, text = "Finished all!", description = "All lessons completed")
+        }
+
+    }
+}
+
+@Composable
+fun AchievementCard(icon: Int, text: String, description: String){
+    Card(modifier = Modifier
+        .padding(5.dp)
+        .size(100.dp), colors = CardDefaults.cardColors(
+        containerColor = Color(0xFF90EE90))) {
+        Image(
+            painter = painterResource(id = icon),
+            contentDescription = description,
+            modifier = Modifier
+                .size(70.dp)
+                .align(alignment = Alignment.CenterHorizontally)
+                .padding(top = 5.dp)
+        )
+        Text(text = text, fontSize = 12.sp, fontWeight = FontWeight.SemiBold,
+            modifier = Modifier
+                .align(alignment = Alignment.CenterHorizontally)
+                .padding(top = 5.dp, bottom = 10.dp))
+    }
+}
+
+@Composable
+fun ThemeDetailScreen(theme: Theme, navController: NavController) {
+    val context = LocalContext.current
+    var answer by remember { mutableStateOf("") }
+
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .padding(16.dp)) {
+        Text(text = theme.title, fontSize = 32.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary, modifier = Modifier
+            .padding(top = 10.dp)
+            .align(alignment = Alignment.CenterHorizontally))
+        Spacer(modifier = Modifier.height(16.dp))
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+        ){
+            Text(text = theme.content, fontSize = 18.sp)
+        }
+        Spacer(modifier = Modifier.height(18.dp))
+        Text(text = "Question: ${theme.question}", fontSize = 18.sp)
+        TextField(value = answer, onValueChange = { answer = it }, label = { Text("Your answer") })
+        Spacer(modifier = Modifier.height(16.dp))
+        Row{
+            Button(onClick = {
+                if (answer.equals(theme.correctAnswer, ignoreCase = true)) {
+                    Toast.makeText(context, "Correct!", Toast.LENGTH_SHORT).show()
+                    saveAchievement(context, "${theme.title}_completed")
+                    if (theme.title == "Hello, World!") {
+                        saveAchievement(context, "first_lesson_completed")
+                    }
+                    if (checkAllLessonsCompleted(context)) saveAchievement(context, "all_lessons_completed")
+                } else {
+                    Toast.makeText(context, "Incorrect, try again.", Toast.LENGTH_SHORT).show()
+                }
+            }) { Text(text = "Check Answer") }
+            Spacer(modifier = Modifier.width(16.dp))
+            Button(onClick = { navController.popBackStack() }) { Text(text = "Back") }
+        }
     }
 }
 
@@ -185,36 +265,6 @@ fun saveAchievement(context: Context, key: String) {
 fun isAchievementUnlocked(context: Context, key: String): Boolean {
     val prefs = context.getSharedPreferences("achievements", Context.MODE_PRIVATE)
     return prefs.getBoolean(key, false)
-}
-
-@Composable
-fun ThemeDetailScreen(theme: Theme, navController: NavController) {
-    val context = LocalContext.current
-    var answer by remember { mutableStateOf("") }
-
-    Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
-        Text(text = theme.title, fontSize = 28.sp, fontWeight = FontWeight.Bold)
-        Spacer(modifier = Modifier.height(16.dp))
-        Text(text = theme.content, fontSize = 18.sp)
-        Spacer(modifier = Modifier.height(24.dp))
-        Text(text = "Question: ${theme.question}", fontSize = 18.sp)
-        TextField(value = answer, onValueChange = { answer = it }, label = { Text("Your answer") })
-        Spacer(modifier = Modifier.height(16.dp))
-        Button(onClick = {
-            if (answer.equals(theme.correctAnswer, ignoreCase = true)) {
-                Toast.makeText(context, "Correct!", Toast.LENGTH_SHORT).show()
-                saveAchievement(context, "${theme.title}_completed")
-                if (theme.title == "Hello, World!") {
-                    saveAchievement(context, "first_lesson_completed")
-                }
-                if (checkAllLessonsCompleted(context)) saveAchievement(context, "all_lessons_completed")
-            } else {
-                Toast.makeText(context, "Incorrect, try again.", Toast.LENGTH_SHORT).show()
-            }
-        }) { Text(text = "Check Answer") }
-        Spacer(modifier = Modifier.height(16.dp))
-        Button(onClick = { navController.popBackStack() }) { Text(text = "Back") }
-    }
 }
 
 fun checkAllLessonsCompleted(context: Context): Boolean {
