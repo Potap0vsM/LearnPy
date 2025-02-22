@@ -16,6 +16,7 @@ fun NavGraph(
     val themes = listOf(
         Theme(
             title = "Hello, World!",
+            description = "Brief introduction to python",
             content = "The \"Hello, World!\" program is a simple script that displays the text \"Hello, World!\" on the screen. " +
                     "It's often the first program written when learning a new language, " +
                     "serving as an introduction to Python's syntax and the print() function.",
@@ -24,6 +25,7 @@ fun NavGraph(
         ),
         Theme(
             title = "Variables and Types",
+            description = "What type of information can you use?",
             content = "In Python, variables are used to store data values and do not require explicit declaration. " +
                     "Python supports various data types, including integers, floats, and strings. For example:\n" +
                     "\n" +
@@ -38,6 +40,7 @@ fun NavGraph(
         ),
         Theme(
             title = "Lists",
+            description = "How to store a lot of data in one line of code",
             content = "Lists in Python are ordered collections that can hold multiple items, which can be of different types. " +
                     "Lists are defined using square brackets:\n" +
                     "\n" +
@@ -54,6 +57,7 @@ fun NavGraph(
         ),
         Theme(
             title = "Basic Operators",
+            description = "Introduction to operators and math",
             content = "Python provides various operators for arithmetic and logical operations. " +
                     "Arithmetic operators include + (addition), - (subtraction), * (multiplication), / (division), and % (modulus), which returns the remainder of a division:\n" +
                     "\n" +
@@ -65,6 +69,7 @@ fun NavGraph(
         ),
         Theme(
             title = "Conditions",
+            description = "if-else conditions and some more operators",
             content = "Conditional statements allow you to execute code blocks based on certain conditions using if, elif, and else. " +
                     "The in operator checks if a value exists within a sequence, such as a list:\n" +
                     "\n" +

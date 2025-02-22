@@ -45,6 +45,7 @@ fun StudyScreen(navController: NavController) {
     val themes = listOf(
         Theme(
             title = "Hello, World!",
+            description = "Brief introduction to python",
             content = "The \"Hello, World!\" program is a simple script that displays the text \"Hello, World!\" on the screen. " +
                     "It's often the first program written when learning a new language, " +
                     "serving as an introduction to Python's syntax and the print() function.",
@@ -53,6 +54,7 @@ fun StudyScreen(navController: NavController) {
         ),
         Theme(
             title = "Variables and Types",
+            description = "What type of information can you use?",
             content = "In Python, variables are used to store data values and do not require explicit declaration. " +
                     "Python supports various data types, including integers, floats, and strings. For example:\n" +
                     "\n" +
@@ -67,6 +69,7 @@ fun StudyScreen(navController: NavController) {
         ),
         Theme(
             title = "Lists",
+            description = "How to store a lot of data in one line of code",
             content = "Lists in Python are ordered collections that can hold multiple items, which can be of different types. " +
                     "Lists are defined using square brackets:\n" +
                     "\n" +
@@ -83,6 +86,7 @@ fun StudyScreen(navController: NavController) {
         ),
         Theme(
             title = "Basic Operators",
+            description = "Introduction to operators and math",
             content = "Python provides various operators for arithmetic and logical operations. " +
                     "Arithmetic operators include + (addition), - (subtraction), * (multiplication), / (division), and % (modulus), which returns the remainder of a division:\n" +
                     "\n" +
@@ -94,6 +98,7 @@ fun StudyScreen(navController: NavController) {
         ),
         Theme(
             title = "Conditions",
+            description = "if-else conditions and some more operators",
             content = "Conditional statements allow you to execute code blocks based on certain conditions using if, elif, and else. " +
                     "The in operator checks if a value exists within a sequence, such as a list:\n" +
                     "\n" +
@@ -143,6 +148,7 @@ fun ThemeCard(theme: Theme, navController: NavController) {
     ) {
         Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text(text = theme.title, fontSize = 24.sp, fontWeight = FontWeight.SemiBold)
+            Text(text = theme.description, fontSize = 16.sp)
             Button(onClick = { navController.navigate("themeDetail/${theme.title}") }) {
                 Text(text = "Start topic")
             }
@@ -197,7 +203,8 @@ fun AchievementsRow(context: Context) {
 fun AchievementCard(icon: Int, text: String, description: String){
     Card(modifier = Modifier
         .padding(5.dp)
-        .size(100.dp), colors = CardDefaults.cardColors(
+        .size(100.dp)
+        .padding(top = 5.dp, start = 5.dp), colors = CardDefaults.cardColors(
         containerColor = Color(0xFF90EE90))) {
         Image(
             painter = painterResource(id = icon),
@@ -235,10 +242,13 @@ fun ThemeDetailScreen(theme: Theme, navController: NavController) {
             Text(text = theme.content, fontSize = 18.sp, modifier = Modifier.padding(10.dp))
         }
         Spacer(modifier = Modifier.height(18.dp))
-        Text(text = "Question: ${theme.question}", fontSize = 18.sp)
-        TextField(value = answer, onValueChange = { answer = it }, label = { Text("Your answer") })
+        Text(text = "Question:", fontSize = 18.sp, modifier = Modifier.padding(start = 8.dp, end = 8.dp), fontWeight = FontWeight.Bold)
+        Text(text = "${theme.question} ", fontSize = 18.sp, modifier = Modifier.padding(start = 8.dp, end = 8.dp))
+        TextField(value = answer, onValueChange = { answer = it }, label = { Text("Your answer") }, modifier = Modifier.fillMaxWidth().padding(8.dp))
         Spacer(modifier = Modifier.height(16.dp))
-        Row{
+        Row(modifier = Modifier.padding(start = 8.dp, end = 8.dp)){
+            Button(onClick = { navController.popBackStack() }) { Text(text = "Back") }
+            Spacer(modifier = Modifier.width(128.dp))
             Button(onClick = {
                 if (answer.equals(theme.correctAnswer, ignoreCase = true)) {
                     Toast.makeText(context, "Correct!", Toast.LENGTH_SHORT).show()
@@ -251,8 +261,6 @@ fun ThemeDetailScreen(theme: Theme, navController: NavController) {
                     Toast.makeText(context, "Incorrect, try again.", Toast.LENGTH_SHORT).show()
                 }
             }) { Text(text = "Check Answer") }
-            Spacer(modifier = Modifier.width(16.dp))
-            Button(onClick = { navController.popBackStack() }) { Text(text = "Back") }
         }
     }
 }
