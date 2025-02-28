@@ -115,7 +115,8 @@ fun StudyScreen(navController: NavController) {
 
     Column(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
+            .height(770.dp)
             .padding(16.dp)
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -217,7 +218,7 @@ fun AchievementCard(icon: Int, text: String, description: String){
         Text(text = text, fontSize = 12.sp, fontWeight = FontWeight.SemiBold,
             modifier = Modifier
                 .align(alignment = Alignment.CenterHorizontally)
-                .padding(top = 5.dp, bottom = 10.dp))
+                .padding(top = 5.dp, bottom = 5.dp))
     }
 }
 
