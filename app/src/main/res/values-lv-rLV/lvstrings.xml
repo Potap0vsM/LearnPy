@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LearnPy</string>
+
+    <string name="button">Sākt tēmu</string>
+
+    <string name="user">Lietotājs</string>
+
+    <string name="achievements">Sasniegumi</string>
+
+    <string name="achievement_first">Sākam spēcīgi!</string>
+    <string name="achievement_second">Pabeidza visu!</string>
+
+    <string name="question">Jautājums:</string>
+    <string name="correct">Pareizi!</string>
+    <string name="wrong">Nepareizi, mēģiniet vēlreiz.</string>
+    <string name="button_back">Atpakaļ</string>
+    <string name="button_check">Pārbaudit atbildi</string>
+    <string name="answer">Jūsu atbilde</string>
+
+    <string name="first_topic">Hello, World!</string>
+    <string name="first_descrip">Īss ievads Python</string>
+    <string name="first_content">\"Hello, World!\" programma ir vienkāršs skripts, kas parāda tekstu \"Hello, World!\" uz ekrāna. Bieži vien tā ir pirmā programma, kas tiek uzrakstīta, apgūstot jaunu valodu, un tā kalpo kā ievads Python sintakse un print() funkcijai.</string>
+    <string name="first_question_one">Kāda funkcija palīdzēs izvadīt informāciju?</string>
+    <string name="first_question_two">Kāda funkcija palīdzēs izvadīt informāciju?</string>
+    <string name="first_question_three">Kāda funkcija palīdzēs izvadīt informāciju?</string>
+
+    <string name="second_topic">Mainīgie un to veidi</string>
+    <string name="second_descrip">Kāda veida informāciju jūs varat izmantot?</string>
+    <string name="second_content">Programmā Python mainīgie tiek izmantoti datu vērtību glabāšanai, un tiem nav nepieciešama skaidra deklarācija. Python atbalsta dažādus datu tipus, tostarp \"integer\", \"float\" un \"String\". Piemēram:\n\nmyint = 7\nmyfloat = 7.0\nmystring = \'Hello!\'\n\nŠeit myint ir \"integer\", myfloat ir \"float\", un mystring ir \"String\". Varat veikt tādas darbības kā skaitļu pievienošana un virkņu savienošana.</string>
+    <string name="second_question_one">Kāds ir šīs rakstzīmju secības veids: \'81928\'?</string>
+    <string name="second_question_two">Kāds ir šīs rakstzīmju secības veids: \'81928\'?</string>
+    <string name="second_question_three">Kāds ir šīs rakstzīmju secības veids: \'81928\'?</string>
+
+    <string name="third_topic">Saraksti</string>
+    <string name="third_descrip">Kā vienā koda rindā saglabāt daudz datu</string>
+    <string name="third_content">Python saraksti ir sakārtotas kolekcijas, kurās var būt vairāki vienumi, kas var būt dažāda veida. Saraksti tiek definēti, izmantojot kvadrātiekavas:\nmylist = [1, 2, 3]\n\nVarat piekļūt saraksta vienumiem pēc indeksa, sākot ar 0:\n\nprint(mylist[0]) # Izvade: 1\n\nSaraksti ir maināmi, kas nozīmē, ka varat mainīt to saturu, piemēram, pievienot jaunus elementus, izmantojot append() metodi:\nmylist.append(4)</string>
+    <string name="third_question_one">Kādu funkciju izmantosit, lai pievienotu kaut ko esošam sarakstam?</string>
+    <string name="third_question_two">Kādu funkciju izmantosit, lai pievienotu kaut ko esošam sarakstam?</string>
+    <string name="third_question_three">Kādu funkciju izmantosit, lai pievienotu kaut ko esošam sarakstam?</string>
+
+    <string name="fourth_topic">Pamatoperatori</string>
+    <string name="fourth_descrip">Ievads operatoros un matemātikā</string>
+    <string name="fourth_content">Python nodrošina dažādus operatorus aritmētiskām un loģiskajām operācijām. Aritmētiskie operatori ietver + (saskaitīšana), - (atņemšana), * (reizināšana), / (dalīšana) un % (modulis), kas atgriež dalīšanas atlikumu:\n\natlikums = 10 % 3 # atlikums ir 1\n\nSalīdzinājuma operatori, piemēram, == (vienāds ar), != (nav vienāds ar), &gt; (lielāks par), un &lt; (mazāk nekā) izmanto vērtību salīdzināšanai.</string>
+    <string name="fourth_question_one">Kurš operators atgriež dalījuma atlikušo daļu?</string>
+    <string name="fourth_question_two">Kurš operators atgriež dalījuma atlikušo daļu?</string>
+    <string name="fourth_question_three">Kurš operators atgriež dalījuma atlikušo daļu?</string>
+
+    <string name="fifth_topic">Nosacījumi</string>
+    <string name="fifth_descrip">if-else nosacījumi un vēl daži operatori</string>
+    <string name="fifth_content">Nosacītie paziņojumi ļauj izpildīt koda blokus, pamatojoties uz noteiktiem nosacījumiem, izmantojot if, elif un else. Operators in pārbauda, vai kāda vērtība eksistē secībā, piemēram, sarakstā:\n\nname = \'Alice\'\nnames = [\'Bob\', \'Charlie\', \'Alise\']\n\nif name in names:\nprint(\'Found!\')\n\nTas izvadīs \'Found!\' jo Alise ir vārdu sarakstā.</string>
+    <string name="fifth_question_one">Kuru operatoru jūs izmantotu, lai pārbaudītu, vai jūsu vārds ir nejaušu vārdu sarakstā?</string>
+    <string name="fifth_question_two">Kuru operatoru jūs izmantotu, lai pārbaudītu, vai jūsu vārds ir nejaušu vārdu sarakstā?</string>
+    <string name="fifth_question_three">Kuru operatoru jūs izmantotu, lai pārbaudītu, vai jūsu vārds ir nejaušu vārdu sarakstā?</string>
+</resources>

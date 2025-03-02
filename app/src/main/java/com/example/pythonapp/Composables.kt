@@ -35,80 +35,49 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat.getString
 import androidx.navigation.NavController
 
 @Composable
 fun StudyScreen(navController: NavController) {
     val themes = listOf(
         Theme(
-            title = "Hello, World!",
-            description = "Brief introduction to python",
-            content = "The \"Hello, World!\" program is a simple script that displays the text \"Hello, World!\" on the screen. " +
-                    "It's often the first program written when learning a new language, " +
-                    "serving as an introduction to Python's syntax and the print() function.",
-            question = "What function will help you output information?",
+            title = stringResource(id = R.string.first_topic),
+            description = stringResource(id = R.string.first_descrip),
+            content = stringResource(id = R.string.first_content),
+            question = stringResource(id = R.string.first_question_one),
             correctAnswer = "print()"
         ),
         Theme(
-            title = "Variables and Types",
-            description = "What type of information can you use?",
-            content = "In Python, variables are used to store data values and do not require explicit declaration. " +
-                    "Python supports various data types, including integers, floats, and strings. For example:\n" +
-                    "\n" +
-                    "myint = 7\n" +
-                    "myfloat = 7.0\n" +
-                    "mystring = 'hello'\n" +
-                    "\n" +
-                    "Here, myint is an integer, myfloat is a float, and mystring is a string. " +
-                    "You can perform operations like addition on numbers and concatenation on strings.",
-            question = "What would be type of this character sequence: '81928'",
+            title = stringResource(id = R.string.second_topic),
+            description = stringResource(id = R.string.second_descrip),
+            content = stringResource(id = R.string.second_content),
+            question = stringResource(id = R.string.second_question_one),
             correctAnswer = "String"
         ),
         Theme(
-            title = "Lists",
-            description = "How to store a lot of data in one line of code",
-            content = "Lists in Python are ordered collections that can hold multiple items, which can be of different types. " +
-                    "Lists are defined using square brackets:\n" +
-                    "\n" +
-                    "mylist = [1, 2, 3]\n" +
-                    "You can access list items by index, starting at 0:\n" +
-                    "\n" +
-                    "print(mylist[0])  # Output: 1\n" +
-                    "\n" +
-                    "Lists are mutable, meaning you can change their content, such as adding new elements using the append() method:\n" +
-                    "\n" +
-                    "mylist.append(4)",
-            question = "What function you will use to add something to a existing list?",
+            title = stringResource(id = R.string.third_topic),
+            description = stringResource(id = R.string.third_descrip),
+            content = stringResource(id = R.string.third_content),
+            question = stringResource(id = R.string.third_question_one),
             correctAnswer = "append()"
         ),
         Theme(
-            title = "Basic Operators",
-            description = "Introduction to operators and math",
-            content = "Python provides various operators for arithmetic and logical operations. " +
-                    "Arithmetic operators include + (addition), - (subtraction), * (multiplication), / (division), and % (modulus), which returns the remainder of a division:\n" +
-                    "\n" +
-                    "remainder = 10 % 3  # remainder is 1\n" +
-                    "\n" +
-                    "Comparison operators like == (equal to), != (not equal to), > (greater than), and < (less than) are used to compare values.",
-            question = "Which operator returns the integer remainder of the division.",
+            title = stringResource(id = R.string.fourth_topic),
+            description = stringResource(id = R.string.fourth_descrip),
+            content = stringResource(id = R.string.fourth_content),
+            question = stringResource(id = R.string.fourth_question_one),
             correctAnswer = "%"
         ),
         Theme(
-            title = "Conditions",
-            description = "if-else conditions and some more operators",
-            content = "Conditional statements allow you to execute code blocks based on certain conditions using if, elif, and else. " +
-                    "The in operator checks if a value exists within a sequence, such as a list:\n" +
-                    "\n" +
-                    "name = \"Alice\"\n" +
-                    "names = [\"Bob\", \"Charlie\", \"Alice\"]\n" +
-                    "if name in names:\n" +
-                    "    print(\"Found!\")\n" +
-                    "\n" +
-                    "This will output \"Found!\" because \"Alice\" is in the names list.",
-            question = "Which operator would you use to know if your name is in a list of random names?",
+            title = stringResource(id = R.string.fifth_topic),
+            description = stringResource(id = R.string.fifth_descrip),
+            content = stringResource(id = R.string.fifth_content),
+            question = stringResource(id = R.string.fifth_question_one),
             correctAnswer = "in"
         )
     )
@@ -151,7 +120,7 @@ fun ThemeCard(theme: Theme, navController: NavController) {
             Text(text = theme.title, fontSize = 24.sp, fontWeight = FontWeight.SemiBold)
             Text(text = theme.description, fontSize = 16.sp)
             Button(onClick = { navController.navigate("themeDetail/${theme.title}") }) {
-                Text(text = "Start topic")
+                Text(text = stringResource(id = R.string.button))
             }
         }
     }
@@ -175,9 +144,9 @@ fun AccountInfoScreen(profilePictureRes: Int, userName: String, context: Context
             contentScale = ContentScale.Crop
         )
         Spacer(modifier = Modifier.height(16.dp))
-        Text(text = userName, fontSize = 20.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+        Text(text = stringResource(id = R.string.user), fontSize = 20.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
         Spacer(modifier = Modifier.height(24.dp))
-        Text(text = "Achievements", fontSize = 16.sp, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.primary)
+        Text(text = stringResource(id = R.string.achievements), fontSize = 16.sp, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.primary)
         Spacer(modifier = Modifier.height(8.dp))
         AchievementsRow(context)
     }
@@ -192,9 +161,9 @@ fun AchievementsRow(context: Context) {
         .height(500.dp)){
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
             if (firstLessonUnlocked)
-                AchievementCard(icon = R.drawable.first_lesson, text = "Starting strong!", description = "Finished first lesson")
+                AchievementCard(icon = R.drawable.first_lesson, text = stringResource(id = R.string.achievement_first), description = "Finished first lesson")
             if (allLessonsUnlocked)
-                AchievementCard(icon = R.drawable.trophey_icon, text = "Finished all!", description = "All lessons completed")
+                AchievementCard(icon = R.drawable.trophey_icon, text = stringResource(id = R.string.achievement_second), description = "All lessons completed")
         }
 
     }
@@ -229,7 +198,8 @@ fun ThemeDetailScreen(theme: Theme, navController: NavController) {
 
     Column(modifier = Modifier
         .fillMaxSize()
-        .padding(16.dp)) {
+        .padding(16.dp)
+        .verticalScroll(rememberScrollState())) {
         Text(text = theme.title, fontSize = 32.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary, modifier = Modifier
             .padding(top = 10.dp)
             .align(alignment = Alignment.CenterHorizontally))
@@ -243,25 +213,27 @@ fun ThemeDetailScreen(theme: Theme, navController: NavController) {
             Text(text = theme.content, fontSize = 18.sp, modifier = Modifier.padding(10.dp))
         }
         Spacer(modifier = Modifier.height(18.dp))
-        Text(text = "Question:", fontSize = 18.sp, modifier = Modifier.padding(start = 8.dp, end = 8.dp), fontWeight = FontWeight.Bold)
+        Text(text = stringResource(id = R.string.question), fontSize = 18.sp, modifier = Modifier.padding(start = 8.dp, end = 8.dp), fontWeight = FontWeight.Bold)
         Text(text = "${theme.question} ", fontSize = 18.sp, modifier = Modifier.padding(start = 8.dp, end = 8.dp))
-        TextField(value = answer, onValueChange = { answer = it }, label = { Text("Your answer") }, modifier = Modifier.fillMaxWidth().padding(8.dp))
+        TextField(value = answer, onValueChange = { answer = it }, label = { Text(stringResource(id = R.string.answer)) }, modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp))
         Spacer(modifier = Modifier.height(16.dp))
         Row(modifier = Modifier.padding(start = 8.dp, end = 8.dp)){
-            Button(onClick = { navController.popBackStack() }) { Text(text = "Back") }
+            Button(onClick = { navController.popBackStack() }) { Text(text = stringResource(id = R.string.button_back)) }
             Spacer(modifier = Modifier.width(128.dp))
             Button(onClick = {
                 if (answer.equals(theme.correctAnswer, ignoreCase = true)) {
-                    Toast.makeText(context, "Correct!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, context.getString(R.string.correct), Toast.LENGTH_SHORT).show()
                     saveAchievement(context, "${theme.title}_completed")
                     if (theme.title == "Hello, World!") {
                         saveAchievement(context, "first_lesson_completed")
                     }
                     if (checkAllLessonsCompleted(context)) saveAchievement(context, "all_lessons_completed")
                 } else {
-                    Toast.makeText(context, "Incorrect, try again.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, context.getString(R.string.wrong), Toast.LENGTH_SHORT).show()
                 }
-            }) { Text(text = "Check Answer") }
+            }) { Text(text = stringResource(id = R.string.button_check)) }
         }
     }
 }

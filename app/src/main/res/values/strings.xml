@@ -1,3 +1,54 @@
 <resources>
     <string name="app_name">LearnPy</string>
+
+    <string name="button">Start topic</string>
+
+    <string name="user">User</string>
+
+    <string name="achievements">Achievements</string>
+
+    <string name="achievement_first">Starting strong!</string>
+    <string name="achievement_second">Finished all!</string>
+
+    <string name="question">Question:</string>
+    <string name="correct">Correct!</string>
+    <string name="wrong">Incorrect, try again.</string>
+    <string name="button_back">Back</string>
+    <string name="button_check">Check answer</string>
+    <string name="answer">Your answer</string>
+
+    <string name="first_topic">Hello, World!</string>
+    <string name="first_descrip">Brief introduction to Python</string>
+    <string name="first_content">The "Hello, World!" program is a simple script that displays the text "Hello, World!" on the screen. It’s often the first program written when learning a new language, serving as an introduction to Python’s syntax and the print() function.</string>
+    <string name="first_question_one">What function will help you output information?</string>
+    <string name="first_question_two">What function will help you output information?</string>
+    <string name="first_question_three">What function will help you output information?</string>
+
+    <string name="second_topic">Variables and Types</string>
+    <string name="second_descrip">What type of information can you use?</string>
+    <string name="second_content">In Python, variables are used to store data values and do not require explicit declaration. Python supports various data types, including integers, floats, and strings. For example:\n \nmyint = 7\nmyfloat = 7.0\nmystring = \'hello\'\n \nHere, myint is an integer, myfloat is a float, and mystring is a string. You can perform operations like addition on numbers and concatenation on strings.</string>
+    <string name="second_question_one">What is the type of the character sequence: \'81928\'?</string>
+    <string name="second_question_two">What is the type of the character sequence: \'81928\'?</string>
+    <string name="second_question_three">What is the type of the character sequence: \'81928\'?</string>
+
+    <string name="third_topic">Lists</string>
+    <string name="third_descrip">How to store a lot of data in one line of code</string>
+    <string name="third_content">Lists in Python are ordered collections that can hold multiple items, which can be of different types. Lists are defined using square brackets:\nmylist = [1, 2, 3] \n \nYou can access list items by index, starting at 0:\n\nprint(mylist[0])  # Output: 1\n\nLists are mutable, meaning you can change their content, such as adding new elements using the append() method:\nmylist.append(4)</string>
+    <string name="third_question_one">What function will you use to add something to an existing list?</string>
+    <string name="third_question_two">What function will you use to add something to an existing list?</string>
+    <string name="third_question_three">What function will you use to add something to an existing list?</string>
+
+    <string name="fourth_topic">Basic Operators</string>
+    <string name="fourth_descrip">Introduction to operators and math</string>
+    <string name="fourth_content">Python provides various operators for arithmetic and logical operations. Arithmetic operators include + (addition), - (subtraction), * (multiplication), / (division), and % (modulus), which returns the remainder of a division:\n  \nremainder = 10 % 3  # remainder is 1\n \nComparison operators like == (equal to), != (not equal to), &gt; (greater than), and &lt; (less than) are used to compare values.</string>
+    <string name="fourth_question_one">Which operator returns the remainder of a division?</string>
+    <string name="fourth_question_two">Which operator returns the remainder of a division?</string>
+    <string name="fourth_question_three">Which operator returns the remainder of a division?</string>
+
+    <string name="fifth_topic">Conditions</string>
+    <string name="fifth_descrip">if-else conditions and some more operators</string>
+    <string name="fifth_content">Conditional statements allow you to execute code blocks based on certain conditions using if, elif, and else. The in operator checks if a value exists within a sequence, such as a list:\n \nname = \'Alice\'  \nnames = [\'Bob\', \'Charlie\', \'Alice\']\n\nif name in names:\nprint(\'Found!\')\n \nThis will output \'Found!\' because Alice is in the names list.</string>
+    <string name="fifth_question_one">Which operator would you use to check if your name is in a list of random names?</string>
+    <string name="fifth_question_two">Which operator would you use to check if your name is in a list of random names?</string>
+    <string name="fifth_question_three">Which operator would you use to check if your name is in a list of random names?</string>
 </resources>
