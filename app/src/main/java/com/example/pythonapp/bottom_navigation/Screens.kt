@@ -18,5 +18,5 @@ fun Screen1(navHostController: NavHostController){
 @ExperimentalMaterial3Api
 @Composable
 fun Screen2(){
-    AccountInfoScreen(R.drawable.account_icon, "User", LocalContext.current)
+    AccountInfoScreen(R.drawable.account_icon, LocalContext.current)
 }

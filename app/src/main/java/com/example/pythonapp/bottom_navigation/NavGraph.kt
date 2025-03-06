@@ -20,36 +20,56 @@ fun NavGraph(
             title = stringResource(id = R.string.first_topic),
             description = stringResource(id = R.string.first_descrip),
             content = stringResource(id = R.string.first_content),
-            question = stringResource(id = R.string.first_question_one),
-            correctAnswer = "print()"
+            questionOne = stringResource(id = R.string.first_question_one),
+            questionTwo = stringResource(id = R.string.first_question_two),
+            questionThree = stringResource(id = R.string.first_question_three),
+            correctAnswerOne = "print()",
+            correctAnswerTwo = "Hello, World!",
+            correctAnswerThree = "syntax error"
         ),
         Theme(
             title = stringResource(id = R.string.second_topic),
             description = stringResource(id = R.string.second_descrip),
             content = stringResource(id = R.string.second_content),
-            question = stringResource(id = R.string.second_question_one),
-            correctAnswer = "String"
+            questionOne = stringResource(id = R.string.second_question_one),
+            questionTwo = stringResource(id = R.string.second_question_two),
+            questionThree = stringResource(id = R.string.second_question_three),
+            correctAnswerOne = "String",
+            correctAnswerTwo = "Float",
+            correctAnswerThree = "Boolean"
         ),
         Theme(
             title = stringResource(id = R.string.third_topic),
             description = stringResource(id = R.string.third_descrip),
             content = stringResource(id = R.string.third_content),
-            question = stringResource(id = R.string.third_question_one),
-            correctAnswer = "append()"
+            questionOne = stringResource(id = R.string.third_question_one),
+            questionTwo = stringResource(id = R.string.third_question_two),
+            questionThree = stringResource(id = R.string.third_question_three),
+            correctAnswerOne = "append()",
+            correctAnswerTwo = "3",
+            correctAnswerThree = "remove()"
         ),
         Theme(
             title = stringResource(id = R.string.fourth_topic),
             description = stringResource(id = R.string.fourth_descrip),
             content = stringResource(id = R.string.fourth_content),
-            question = stringResource(id = R.string.fourth_question_one),
-            correctAnswer = "%"
+            questionOne = stringResource(id = R.string.fourth_question_one),
+            questionTwo = stringResource(id = R.string.fourth_question_two),
+            questionThree = stringResource(id = R.string.fourth_question_three),
+            correctAnswerOne = "%",
+            correctAnswerTwo = "True",
+            correctAnswerThree = "9"
         ),
         Theme(
             title = stringResource(id = R.string.fifth_topic),
             description = stringResource(id = R.string.fifth_descrip),
             content = stringResource(id = R.string.fifth_content),
-            question = stringResource(id = R.string.fifth_question_one),
-            correctAnswer = "in"
+            questionOne = stringResource(id = R.string.fifth_question_one),
+            questionTwo = stringResource(id = R.string.fifth_question_two),
+            questionThree = stringResource(id = R.string.fifth_question_three),
+            correctAnswerOne = "in",
+            correctAnswerTwo = "'Found!'",
+            correctAnswerThree = "Nothing"
         )
     )
     NavHost(navController = navHostController, startDestination = "study") {

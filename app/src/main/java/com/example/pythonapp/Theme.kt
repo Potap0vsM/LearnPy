@@ -4,7 +4,11 @@ data class Theme(
     val title: String,
     val description: String,
     val content: String,
-    val question: String,
-    val correctAnswer: String
+    val questionOne: String,
+    val questionTwo: String,
+    val questionThree: String,
+    val correctAnswerOne: String,
+    val correctAnswerTwo: String,
+    val correctAnswerThree: String
 )
 

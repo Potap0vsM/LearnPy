@@ -33,13 +33,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.ContextCompat.getString
 import androidx.navigation.NavController
 
 @Composable
@@ -49,36 +47,56 @@ fun StudyScreen(navController: NavController) {
             title = stringResource(id = R.string.first_topic),
             description = stringResource(id = R.string.first_descrip),
             content = stringResource(id = R.string.first_content),
-            question = stringResource(id = R.string.first_question_one),
-            correctAnswer = "print()"
+            questionOne = stringResource(id = R.string.first_question_one),
+            questionTwo = stringResource(id = R.string.first_question_two),
+            questionThree = stringResource(id = R.string.first_question_three),
+            correctAnswerOne = "print()",
+            correctAnswerTwo = "Hello, World!",
+            correctAnswerThree = "syntax error"
         ),
         Theme(
             title = stringResource(id = R.string.second_topic),
             description = stringResource(id = R.string.second_descrip),
             content = stringResource(id = R.string.second_content),
-            question = stringResource(id = R.string.second_question_one),
-            correctAnswer = "String"
+            questionOne = stringResource(id = R.string.second_question_one),
+            questionTwo = stringResource(id = R.string.second_question_two),
+            questionThree = stringResource(id = R.string.second_question_three),
+            correctAnswerOne = "String",
+            correctAnswerTwo = "Float",
+            correctAnswerThree = "Boolean"
         ),
         Theme(
             title = stringResource(id = R.string.third_topic),
             description = stringResource(id = R.string.third_descrip),
             content = stringResource(id = R.string.third_content),
-            question = stringResource(id = R.string.third_question_one),
-            correctAnswer = "append()"
+            questionOne = stringResource(id = R.string.third_question_one),
+            questionTwo = stringResource(id = R.string.third_question_two),
+            questionThree = stringResource(id = R.string.third_question_three),
+            correctAnswerOne = "append()",
+            correctAnswerTwo = "3",
+            correctAnswerThree = "remove()"
         ),
         Theme(
             title = stringResource(id = R.string.fourth_topic),
             description = stringResource(id = R.string.fourth_descrip),
             content = stringResource(id = R.string.fourth_content),
-            question = stringResource(id = R.string.fourth_question_one),
-            correctAnswer = "%"
+            questionOne = stringResource(id = R.string.fourth_question_one),
+            questionTwo = stringResource(id = R.string.fourth_question_two),
+            questionThree = stringResource(id = R.string.fourth_question_three),
+            correctAnswerOne = "%",
+            correctAnswerTwo = "True",
+            correctAnswerThree = "9"
         ),
         Theme(
             title = stringResource(id = R.string.fifth_topic),
             description = stringResource(id = R.string.fifth_descrip),
             content = stringResource(id = R.string.fifth_content),
-            question = stringResource(id = R.string.fifth_question_one),
-            correctAnswer = "in"
+            questionOne = stringResource(id = R.string.fifth_question_one),
+            questionTwo = stringResource(id = R.string.fifth_question_two),
+            questionThree = stringResource(id = R.string.fifth_question_three),
+            correctAnswerOne = "in",
+            correctAnswerTwo = "'Found!'",
+            correctAnswerThree = "Nothing"
         )
     )
 
@@ -127,7 +145,7 @@ fun ThemeCard(theme: Theme, navController: NavController) {
 }
 
 @Composable
-fun AccountInfoScreen(profilePictureRes: Int, userName: String, context: Context) {
+fun AccountInfoScreen(profilePictureRes: Int, context: Context) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -197,7 +215,8 @@ fun ThemeDetailScreen(theme: Theme, navController: NavController) {
     var answer by remember { mutableStateOf("") }
 
     Column(modifier = Modifier
-        .fillMaxSize()
+        .fillMaxWidth()
+        .height(765.dp)
         .padding(16.dp)
         .verticalScroll(rememberScrollState())) {
         Text(text = theme.title, fontSize = 32.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary, modifier = Modifier
@@ -214,7 +233,50 @@ fun ThemeDetailScreen(theme: Theme, navController: NavController) {
         }
         Spacer(modifier = Modifier.height(18.dp))
         Text(text = stringResource(id = R.string.question), fontSize = 18.sp, modifier = Modifier.padding(start = 8.dp, end = 8.dp), fontWeight = FontWeight.Bold)
-        Text(text = "${theme.question} ", fontSize = 18.sp, modifier = Modifier.padding(start = 8.dp, end = 8.dp))
+
+        Text(text = "${theme.questionOne} ", fontSize = 18.sp, modifier = Modifier.padding(start = 8.dp, end = 8.dp))
+        TextField(value = answer, onValueChange = { answer = it }, label = { Text(stringResource(id = R.string.answer)) }, modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp))
+        Spacer(modifier = Modifier.height(16.dp))
+        Row(modifier = Modifier.padding(start = 8.dp, end = 8.dp)){
+            Spacer(modifier = Modifier.width(180.dp))
+            Button(onClick = {
+                if (answer.lowercase().equals(theme.correctAnswerOne.lowercase(), ignoreCase = true)) {
+                    Toast.makeText(context, context.getString(R.string.correct), Toast.LENGTH_SHORT).show()
+                    saveAchievement(context, "${theme.title}_completed")
+                    if (theme.title == "Hello, World!") {
+                        saveAchievement(context, "first_lesson_completed")
+                    }
+                    if (checkAllLessonsCompleted(context)) saveAchievement(context, "all_lessons_completed")
+                } else {
+                    Toast.makeText(context, context.getString(R.string.wrong) + theme.correctAnswerOne, Toast.LENGTH_SHORT).show()
+                }
+            }) { Text(text = stringResource(id = R.string.button_check)) }
+        }
+
+        Text(text = "${theme.questionTwo} ", fontSize = 18.sp, modifier = Modifier.padding(start = 8.dp, end = 8.dp))
+        TextField(value = answer, onValueChange = { answer = it }, label = { Text(stringResource(id = R.string.answer)) }, modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp))
+        Spacer(modifier = Modifier.height(16.dp))
+        Row(modifier = Modifier.padding(start = 8.dp, end = 8.dp)){
+            Spacer(modifier = Modifier.width(180.dp))
+            Button(onClick = {
+                if (answer.lowercase().equals(theme.correctAnswerTwo.lowercase(), ignoreCase = true)) {
+                    Toast.makeText(context, context.getString(R.string.correct), Toast.LENGTH_SHORT).show()
+                    saveAchievement(context, "${theme.title}_completed")
+                    if (theme.title == "Hello, World!") {
+                        saveAchievement(context, "first_lesson_completed")
+                    }
+                    if (checkAllLessonsCompleted(context)) saveAchievement(context, "all_lessons_completed")
+                } else {
+                    Toast.makeText(context, context.getString(R.string.wrong) + theme.correctAnswerTwo, Toast.LENGTH_SHORT).show()
+                }
+            }) { Text(text = stringResource(id = R.string.button_check)) }
+        }
+
+        Text(text = "${theme.questionThree} ", fontSize = 18.sp, modifier = Modifier.padding(start = 8.dp, end = 8.dp))
         TextField(value = answer, onValueChange = { answer = it }, label = { Text(stringResource(id = R.string.answer)) }, modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp))
@@ -223,7 +285,7 @@ fun ThemeDetailScreen(theme: Theme, navController: NavController) {
             Button(onClick = { navController.popBackStack() }) { Text(text = stringResource(id = R.string.button_back)) }
             Spacer(modifier = Modifier.width(128.dp))
             Button(onClick = {
-                if (answer.equals(theme.correctAnswer, ignoreCase = true)) {
+                if (answer.lowercase().equals(theme.correctAnswerThree.lowercase(), ignoreCase = true)) {
                     Toast.makeText(context, context.getString(R.string.correct), Toast.LENGTH_SHORT).show()
                     saveAchievement(context, "${theme.title}_completed")
                     if (theme.title == "Hello, World!") {
@@ -231,7 +293,7 @@ fun ThemeDetailScreen(theme: Theme, navController: NavController) {
                     }
                     if (checkAllLessonsCompleted(context)) saveAchievement(context, "all_lessons_completed")
                 } else {
-                    Toast.makeText(context, context.getString(R.string.wrong), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, context.getString(R.string.wrong) + theme.correctAnswerThree, Toast.LENGTH_SHORT).show()
                 }
             }) { Text(text = stringResource(id = R.string.button_check)) }
         }

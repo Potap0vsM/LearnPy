@@ -28,7 +28,7 @@ abstract class DatabaseAlles : RoomDatabase() {
 
     companion object {
         private var INSTANCE: DatabaseAlles? = null
-        val MIGRATION_1_2: Migration =
+        private val MIGRATION_1_2: Migration =
             object : Migration(1, 2) {
                 override fun migrate(db: SupportSQLiteDatabase) {
                     db.execSQL(

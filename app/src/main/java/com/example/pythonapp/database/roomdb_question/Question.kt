@@ -1,6 +1,5 @@
 package com.example.pythonapp.database.roomdb_question
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
